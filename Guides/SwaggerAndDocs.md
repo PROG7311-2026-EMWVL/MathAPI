@@ -12,23 +12,12 @@ Note: When you run your API, because you already added Swagger, you may have not
     * `Swashbuckle.AspNetCore`
     * `Swashbuckle.AspNetCore.Annotations`
 
-1.  In `Program.cs`, add in the following service definition (before `builder.Services.AddDbContext`). This defines the properties of our Swagger documentation and allows any annotations and remarks we add to the code to appear in the documentation as well:
+1.  In `Program.cs`, add in the following service definition (before `builder.Services.AddDbContext`). This ensures that we can use the Swagger documentation in our API:
     ```
-    builder.Services.AddSwaggerGen(options =>
-    {
-        options.SwaggerDoc("v1", new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "Math API",
-            Description = "An ASP.NET Core Web API for managing MathCalculations"
-        });
-
-        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-    });
+    builder.Services.AddSwaggerGen();
     ```
 
-1. Make following amendment further down in the Program.cs class:
+1. Make following amendment further down in the `Program.cs` class:
     ```
     if (app.Environment.IsDevelopment())
     {
